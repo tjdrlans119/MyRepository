@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import com.mycompany.myapp.exam11.dto.Member;
-import com.mycompany.myapp.exam11.service.Exam11MemberService;
 
 @Component
 public class Exam11MemberDao {
