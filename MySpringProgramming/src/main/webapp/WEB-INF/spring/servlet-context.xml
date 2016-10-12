@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- root 엘리먼트는 하나만 있어어 한다 -->
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />    <!-- 이게 있어야 @을 사용할 수 있음 -->
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />   
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<context:component-scan base-package="com.mycompany.myapp" />   <!-- base-package 위에 있는 controller는 찾지 못함. --> 
+	<!-- controller가 component이기때문에 component를 찾는 기능을 해주는 코드 -->
+	
+	<!-- A를 관리 객체 생성-->
+	<beans:bean name="aObj" class="com.mycompany.kimoon.exam09.A"/>
+	<!-- B를 관리 객체 생성-->
+	<beans:bean name="bObj" class="com.mycompany.kimoon.exam09.B"/>
+	<!-- ServiceA를 관리 객체 생성-->
+	<beans:bean name="serviceAObj" class="com.mycompany.kimoon.exam09.ServiceA"/>
+	<!-- ServiceB를 관리 객체 생성-->
+	<beans:bean name="serviceBObj" class="com.mycompany.kimoon.exam09.ServiceB"/>
+	<!-- ServiceCImpl1를 관리 객체 생성-->
+	<beans:bean name="serviceCImpl" class="com.mycompany.kimoon.exam09.ServiceCImpl1"/>
+	<!-- ServiceDImpl1를 관리 객체 생성-->
+	<beans:bean name="serviceDImpl" class="com.mycompany.kimoon.exam09.ServiceDImpl1"/>
+	
+	<!--Exam09Controller 객체를 찾아서 가져오기-->
+	<beans:bean name="exam09Controller" class="com.mycompany.kimoon.exam09.Exam09Controller">
+		<!--Setter 주입
+		<beans:property name="stter이름" ref="매개값으로 전달할 객체(관리객체이름)"/>
+		-->
+		<beans:property name="a" ref="aObj"/>
+		<beans:property name="b" ref="bObj"/>
+		<beans:property name="serviceA" ref="serviceAObj"/>
+		<beans:property name="serviceB" ref="serviceBObj"/>
+		<beans:property name="serviceC" ref="serviceCImpl"/>
+		<beans:property name="serviceD" ref="serviceDImpl"/>
+	</beans:bean>
+	
+</beans:beans>

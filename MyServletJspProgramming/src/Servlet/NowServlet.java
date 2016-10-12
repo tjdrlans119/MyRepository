@@ -1,0 +1,48 @@
+package Servlet;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.Date;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class NowServlet extends HttpServlet{
+	
+	private String location;
+	
+	public NowServlet() {
+		System.out.println("NowServlet 객체 생성");
+	}
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		System.out.println("NowServlet 초기화");
+		location = config.getInitParameter("location");
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		
+		out.println("<html>");
+		out.println("<head>");
+		out.print("<mera charset='UTF-8'>");
+		out.println("</head>");
+		out.println("<body>");
+		out.println("현재"+location+"시간: "+new Date().toString());
+		out.println("</body>");
+		out.println("</html>");
+		
+		
+		
+	
+	}
+
+}
