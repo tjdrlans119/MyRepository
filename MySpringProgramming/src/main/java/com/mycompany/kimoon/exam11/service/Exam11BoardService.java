@@ -20,7 +20,7 @@ public class Exam11BoardService {
 	private Exam11BoardDao boardDao;
 	
 	public void write(Board board){
-		logger.info("write 처리");
+		logger.info("write 처 리");
 		boardDao.insert(board);
 	}	
 	public List<Board>getList(){
