@@ -32,4 +32,21 @@ public class Exam11BoardDao {
 		return list;
 	}
 
+
+	public Board selectList(int bno) {
+		logger.info("getBoard 처리");
+		Board board = new Board();
+		board.setBtitle("날씨가 춥다");
+		board.setBwriter("성기문");
+		board.setBcontent("감기 조심하세요. 내일부터 감점 있습니다.");
+		return board;
+	}
+
+	public void update(Board board) {
+		logger.info("Update 처리");
+	}
+
+	public void delete(int bno) {
+		logger.info("Delete 처리");		
+	}
 }

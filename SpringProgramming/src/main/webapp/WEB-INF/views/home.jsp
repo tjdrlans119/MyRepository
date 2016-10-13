@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 	</head>
 	<body>
-		SpringProgramming
+		<h1>SpringProgramming</h1> 
 		<hr/>
 		1. <a href="/myapp/exam01/index">Exam01</a>: 컨트롤러 및 요청 매핑 메소드 작성 <br/>
 		2. <a href="/myapp/exam02/index">Exam02</a>: 요청 파리미터 값 받기 <br/>

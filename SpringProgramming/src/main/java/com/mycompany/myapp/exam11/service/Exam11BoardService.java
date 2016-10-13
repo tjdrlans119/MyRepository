@@ -26,4 +26,17 @@ public class Exam11BoardService {
 		List<Board>list= boardDao.selectList();
 		return list;
 	}
+	public Board getBoard(int bno) {
+		logger.info("getList 처리");
+		Board board=boardDao.selectList(bno);
+		return board;
+	}
+	public void updateBoard(Board board) {
+		logger.info("UpdateBoard 처리");
+		boardDao.update(board);
+	}
+	public void boardDelete(int bno) {
+		logger.info("boardDelete 처리");
+		boardDao.delete(bno);
+	}
 }
