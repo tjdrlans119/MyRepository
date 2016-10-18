@@ -6,30 +6,35 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Exam01 {
+public class Exam03 {
+
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		//어떤 JDBC Driver를 사용할 것인가(JDBC Driver 로딩)
 		Class.forName("oracle.jdbc.OracleDriver");
-		
 		//연결 요청을 해서 연결 객체를 얻기
 		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "tester1", "kosa12345");
 		
-		//SQL문을 보내고 실행시킴
-		String sql = "select empno, ename from emp";
-		PreparedStatement pstmt =  conn.prepareStatement(sql); 
-		ResultSet rs = pstmt.executeQuery();
+		//매개변수화된 SQL문
+		String sql = "";
+		sql += "select empno, ename, (sal*12+nvl(comm,0)) as yearsal from emp "; 
+		sql += "where sal>? and deptno=? "; 
+		sql += "order by yearsal desc"; 
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, 400);
+		pstmt.setInt(2, 30);
+		ResultSet rs = pstmt.executeQuery(); 
 		
-		//결과셋에서 한 행씩 읽기
-		while(rs.next()) { //커서가 있는 행만 읽을수 있다.
-			String empno = rs.getString("empno");
+		while(rs.next()) {
+			int empno = rs.getInt("empno");
 			String ename = rs.getString("ename");
-			System.out.println(empno +  ":" + ename);
+			int sal = rs.getInt("yearsal");
+			System.out.println(empno + ":" + ename + ":" + sal);
 		}
-		
-		//JDBC 관련 객체 닫기(메모리 리소스 해체)
+		 
 		rs.close();
 		pstmt.close();
 		conn.close();
+
 	}
 
 }
