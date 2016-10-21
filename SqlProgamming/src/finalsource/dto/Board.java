@@ -1,0 +1,55 @@
+package finalsource.dto;
+
+import java.util.Date;
+
+public class Board {
+	private int bno;
+	private String btitle;
+	private String bcontent;
+	private String bwriter;
+	private int bhitcount;
+	private Date bdate;
+	
+	
+	
+	public String getBwriter() {
+		return bwriter;
+	}
+	public void setBwriter(String bwriter) {
+		this.bwriter = bwriter;
+	}
+
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int string) {
+		this.bno = string;
+	}
+	public String getBtitle() {
+		return btitle;
+	}
+	public void setBtitle(String btitle) {
+		this.btitle = btitle;
+	}
+	public String getBcontent() {
+		return bcontent;
+	}
+	public void setBcontent(String bcontent) {
+		this.bcontent = bcontent;
+	}
+	public int getBhitcount() {
+		return bhitcount;
+	}
+	public void setBhitcount(int bhitcount) {
+		this.bhitcount = bhitcount;
+	}
+	public Date getBdate() {
+		return bdate;
+	}
+	public void setBdate(Date bdate) {
+		this.bdate = bdate;
+	}
+
+	
+	
+}

@@ -1,0 +1,23 @@
+--Section01 시퀀스 생성
+create sequence seq_1;
+
+--다음 수 얻기
+select seq_1.nextval from dual;
+
+--현재부여된 번호
+select seq_1.currval from dual;
+
+create sequence seq_2
+start with 101
+INCREMENT by 10
+MAXVALUE 1000
+CYCLE
+NOCACHE;
+
+select seq_2.nextval from dual;
+
+select seq_2.currval from dual;
+
+drop sequence seq_1;
+drop sequence seq_2;
+drop sequence seq_3;

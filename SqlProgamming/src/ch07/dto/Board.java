@@ -5,7 +5,14 @@ public class Board {
 	private int bno;
 	private String btitle;
 	private String bcontent;
+	private String bwriter;
 	
+	public String getBwriter() {
+		return bwriter;
+	}
+	public void setBwriter(String bwriter) {
+		this.bwriter = bwriter;
+	}
 	public int getBno() {
 		return bno;
 	}
@@ -24,4 +31,5 @@ public class Board {
 	public void setBcontent(String bcontent) {
 		this.bcontent = bcontent;
 	}
+
 }
