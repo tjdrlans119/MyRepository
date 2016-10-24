@@ -27,11 +27,12 @@ public class Exam12Controller {
 	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public String joinForm(){
 		logger.info("joinForm처리");
-		return "exam12/join";
+		return "exam12/joinForm";
 	}
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(Member member){
 		logger.info("join처리");
+		exam12Service.join(member);
 		return "redirect:/exam12/index";
 	}
 	

@@ -8,7 +8,7 @@
 	<body>
 		<br/><br/><hr/><hr/>
 		<h1>[회원 가입 폼]</h1>
-		<br/><br/><hr/><hr/>
+		<hr/><hr/>
 		<form method="post" action="/myapp/exam12/join">
 			아이디: <input type="text" name="mid" value="fall"/> <br/>
 			

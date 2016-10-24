@@ -8,8 +8,10 @@ public class Member {
 	private String mid;
 	private String mname;
 	private String mpassword;
-	private String mage;
-	private String mbirth;
+	private int mage;
+	@DateTimeFormat(pattern="yyy-MM-dd")
+	private Date mbirth;
+	
 	public String getMid() {
 		return mid;
 	}
@@ -28,17 +30,16 @@ public class Member {
 	public void setMpassword(String mpassword) {
 		this.mpassword = mpassword;
 	}
-	public String getMage() {
+	public int getMage() {
 		return mage;
 	}
-	public void setMage(String mage) {
+	public void setMage(int mage) {
 		this.mage = mage;
 	}
-	public String getMbirth() {
+	public Date getMbirth() {
 		return mbirth;
 	}
-	public void setMbirth(String mbirth) {
+	public void setMbirth(Date mbirth) {
 		this.mbirth = mbirth;
 	}
-	
-}
+	}
