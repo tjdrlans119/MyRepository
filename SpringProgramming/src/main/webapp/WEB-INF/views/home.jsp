@@ -24,7 +24,6 @@
 		12. <a href="/myapp/exam12/index">Exam12</a>: 커넥션 풀 설정<br/>
 		13. <a href="/myapp/exam13/index">Exam13</a>: JDBC Template를 이용한 DAO<br/>
 		<br/>
-		14. <a href="/myapp/exam14/index">Exam14</a>: 일반 게시판<br/>
 		
 		
 	</body>
