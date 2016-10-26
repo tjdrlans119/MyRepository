@@ -141,8 +141,8 @@ on board.BWRITER = member.MID;
 -----------------------------------
 
 
-
-
+DELETE from board where bno=10;
+select * from board ORDER BY Bno;
 
 
 
