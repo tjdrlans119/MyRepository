@@ -18,6 +18,11 @@
 	<body>
 		자유 게시판
 		<hr/>
+		
+			<c:if test="${login!=null}">
+				<a href="write">[글쓰기]</a>&nbsp;
+			</c:if>
+		
 		<table style="border-collapse: collapse; border: 1px solid black; width: 600px">
 			<tr style="background-color: #ffcc00">
 				<td style="border: 1px solid black;">번호</td> 
@@ -29,7 +34,9 @@
 			<c:forEach var="freeBoard" items="${list}">
 				<tr>
 					<td style="border: 1px solid black;">${freeBoard.bno}</td>
-					<td style="border: 1px solid black;">${freeBoard.btitle}</td>
+					<td style="border: 1px solid black;">
+					<a href="info?bno=${freeBoard.bno}">${freeBoard.btitle}</a>
+					</td>
 					<td style="border: 1px solid black;">${freeBoard.bwriter}</td>
 					<td style="border: 1px solid black;">${freeBoard.bhitcount}</td>
 					<td style="border: 1px solid black;">${freeBoard.bdate}</td>
@@ -38,15 +45,17 @@
 		</table>
 		
 		<div style="width: 600px">
-			<a href="list?pageNo=1">[처음]</a>
+			<a href="list?pageNo=1">[처음]</a>&nbsp;
 			<c:if test="${groupNo>1}">
-				<a href="list?pageNo=${startPageNo-1}">[이전]</a>
+				<a href="list?pageNo=${startPageNo-1}">[이전]</a>&nbsp;
 			</c:if>
 			
 			<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}">
+			&nbsp;
 				<a href="list?pageNo=${i}" 
 					<c:if test="${pageNo==i}">style="color:red"</c:if>
-				>${i}</a> 
+				>${i}</a>
+				&nbsp; 
 			</c:forEach>
 			
 			<c:if test="${groupNo<totalGroupNo}">
