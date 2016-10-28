@@ -152,11 +152,30 @@ public class PohtoBoardController {
 	   }
 	   
 	   @RequestMapping(value="/modify", method=RequestMethod.POST)
-	   public String modify(PhotoBoard photoboard){
-		   PhotoBoard dbPhotoBoard = photoBoardService.info(photoboard.getBno());
-		   photoboard.setBhitcount(dbPhotoBoard.getBhitcount());
-		   photoBoardService.modify(photoboard);
+	   public String modify(PhotoBoard photoBoard, HttpSession session){
+		   try{
+		   PhotoBoard dbPhotoBoard = photoBoardService.info(photoBoard.getBno());
+		   photoBoard.setBhitcount(dbPhotoBoard.getBhitcount());
+		   
+		  //Originalfile, saveedfile(중복이름이나오면안된다), mimetype 셋팅.
+			photoBoard.setOriginalfile(photoBoard.getPhoto().getOriginalFilename());
+			//파일이름을 유일하게 하기위해 getTime을 통해 중복이안되게 한다.(getTime은long이 리턴됨으로 유일해짐)
+			String savedfile = new Date().getTime() + photoBoard.getPhoto().getOriginalFilename();
+			//저장할 파일에 절대 파일시스템 경로를 얻는다.
+			String realpath = session.getServletContext().getRealPath("/WEB-INF/photo/"+savedfile);
+			photoBoard.getPhoto().transferTo(new File(realpath));
+			photoBoard.setSavedfile(savedfile);	
+			
+			//multipart타입의 photoBoard에서 getCOntentType:파일의 종류를 알아낸다.
+			photoBoard.setMimetype(photoBoard.getPhoto().getContentType());
+			
+			int result = photoBoardService.write(photoBoard);
+		   
+		   photoBoardService.modify(photoBoard);
 		   return "redirect:/photoboard/list";
+		   }catch(Exception e){
+			   e.printStackTrace();
+		   }
 	   }
 	   
 	
