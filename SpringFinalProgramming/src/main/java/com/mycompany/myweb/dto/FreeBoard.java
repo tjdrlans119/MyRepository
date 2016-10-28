@@ -51,5 +51,4 @@ public Date getBdate() {
 public void setBdate(Date bdate) {
 	this.bdate = bdate;
 }
-
 }

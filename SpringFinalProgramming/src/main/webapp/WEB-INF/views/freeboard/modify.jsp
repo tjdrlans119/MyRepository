@@ -19,6 +19,8 @@
 					<td style="background-color:orange; width:70px">내용</td>
 					<td><textarea name="bcontent" style="width:600px; height:200px;">${freeboard.bcontent}</textarea></td>
 				</tr>
+				
+				
 		</table>
 		<input type="submit" value="글수정" />
 		</form>

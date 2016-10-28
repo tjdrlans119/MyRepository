@@ -7,10 +7,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import com.mycompany.myweb.dto.PhotoBoard;
 import com.mycompany.myweb.dto.PhotoBoard;
 
+@Component
 public class PhotoBoardDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -40,7 +42,7 @@ public class PhotoBoardDao {
 	}
 	//rowMpper : 각 컬럼의 값을 연결시켜주기 위해서(컬럼과 필드를 맵핑시켜주기위해서 사용한다)
 	public PhotoBoard photoByBno(int bno) {
-		String sql = "select bno, btitle, bcontent, bwriter, bhitcount, bdate, originalfile, savedfile, mimefile from photoboard where bno=?";
+		String sql = "select bno, btitle, bcontent, bwriter, bhitcount, bdate, originalfile, savedfile, mimetype from photoboard where bno=?";
 		List<PhotoBoard> list = jdbcTemplate.query(sql, new Object[] { bno }, new RowMapper<PhotoBoard>() {
 			@Override
 			public PhotoBoard mapRow(ResultSet rs, int now) throws SQLException {
@@ -62,9 +64,9 @@ public class PhotoBoardDao {
 	
 	public List<PhotoBoard> selectByPage(int pageNo, int rowsPerPage){
 		String sql="";
-		sql+=" select rn, bno, btitle, bhitcount, savedfile";
-		sql+=" from(select rownum as rn, bno, btitle, bhitcount, savedfile ";
-		sql+=" FROM (select bno, btitle, bhitcount, savedfile from photoboard order by bno desc) ";
+		sql+=" select rn, bno, btitle, bhitcount, bdate, savedfile";
+		sql+=" from(select rownum as rn, bno, btitle, bhitcount,bdate, savedfile ";
+		sql+=" FROM (select bno, btitle, bhitcount,bdate, savedfile from photoboard order by bno desc) ";
 		sql+=" where rownum <=?) ";
 		sql+=" WHERE rn>=? ";
 		List<PhotoBoard> list = jdbcTemplate.query(
@@ -77,6 +79,7 @@ public class PhotoBoardDao {
 						photoboard.setBno(rs.getInt("bno"));
 						photoboard.setBtitle(rs.getString("btitle"));
 						photoboard.setBhitcount(rs.getInt("bhitcount"));
+						photoboard.setBdate(rs.getDate("bdate"));
 						photoboard.setSavedfile(rs.getString("Savedfile"));
 						return photoboard;
 					}

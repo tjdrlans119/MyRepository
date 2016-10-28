@@ -40,6 +40,15 @@
 		<beans:property name="dataSource" ref="dataSource" />
 	</beans:bean>
 
+	<!-- Muiltipart/form-data 해석을 위한 스프링 관리객체 설정 -->
+	<beans:bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+	<!-- (Form에서 enctype="multifailpart/form-data"를 추가하면 해석할수있도록 라이브러리를 추가해줘야한다.  -->
+
+
+
+
+
 </beans:beans>
 
 
