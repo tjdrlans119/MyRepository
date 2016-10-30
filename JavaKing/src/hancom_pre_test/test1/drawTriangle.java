@@ -36,7 +36,7 @@ public class drawTriangle {
 			}
 			System.out.println();
 		}
-		for (j = 0; j < 2 * i + 1; j++) { // ������ ��
+		for (j = 0; j < 2 * i + 1; j++) { 
 
 			if (count != 10) {
 				System.out.print(number[count]);
