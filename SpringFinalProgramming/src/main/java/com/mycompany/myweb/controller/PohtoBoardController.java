@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mycompany.myweb.dto.FreeBoard;
 import com.mycompany.myweb.dto.PhotoBoard;
 import com.mycompany.myweb.service.PhotoBoardService;
 
@@ -144,20 +145,20 @@ public class PohtoBoardController {
 		   return "photoboard/info";
 	   }
 
-	   @RequestMapping(value="/modify", method=RequestMethod.GET)
+	 @RequestMapping(value="/modify", method=RequestMethod.GET)
 	   public String modifyForm(int bno, Model model){
 		   PhotoBoard photoBoard = photoBoardService.info(bno);
-		   model.addAttribute("photoboard",photoBoard);
+		   model.addAttribute("photoboard",photoBoard);		   
 		   return "photoboard/modify";
 	   }
 	   
 	   @RequestMapping(value="/modify", method=RequestMethod.POST)
 	   public String modify(PhotoBoard photoBoard, HttpSession session){
 		   try{
-		   PhotoBoard dbPhotoBoard = photoBoardService.info(photoBoard.getBno());
-		   photoBoard.setBhitcount(dbPhotoBoard.getBhitcount());
-		   
-		  //Originalfile, saveedfile(중복이름이나오면안된다), mimetype 셋팅.
+		   String mid = (String) session.getAttribute("login");
+			photoBoard.setBwriter(mid);
+			
+			//Originalfile, saveedfile(중복이름이나오면안된다), mimetype 셋팅.
 			photoBoard.setOriginalfile(photoBoard.getPhoto().getOriginalFilename());
 			//파일이름을 유일하게 하기위해 getTime을 통해 중복이안되게 한다.(getTime은long이 리턴됨으로 유일해짐)
 			String savedfile = new Date().getTime() + photoBoard.getPhoto().getOriginalFilename();
@@ -169,14 +170,15 @@ public class PohtoBoardController {
 			//multipart타입의 photoBoard에서 getCOntentType:파일의 종류를 알아낸다.
 			photoBoard.setMimetype(photoBoard.getPhoto().getContentType());
 			
-			int result = photoBoardService.write(photoBoard);
-		   
-		   photoBoardService.modify(photoBoard);
+			int result = photoBoardService.modify(photoBoard);
+			
+		   }catch (Exception e) {
+			e.printStackTrace();
+			return "photoboard/modify";
+		}
 		   return "redirect:/photoboard/list";
-		   }catch(Exception e){
-			   e.printStackTrace();
-		   }
 	   }
+			
 	   
 	
 	   @RequestMapping("/remove")

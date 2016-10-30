@@ -16,12 +16,10 @@
 					<td style="background-color:orange; width:70px">제목</td>
 					<td><input type="text" name="btitle" style="width:600px" value="${photoboard.btitle}"/></td>
 				</tr>
-				
-				<tr>
-					<td style="background-color:orange; width:70px">원본사진</td>
-					<td><img src="showPhoto?savedfile=${photoboard.savedfile}" width="500px"/></td>
-				</tr>
-				
+				<tr> 
+					<td style="background-color:orange; width:70px">내용</td>
+					<td><textarea name="bcontent" style="width:600px; height:200px;">${photoboard.bcontent}</textarea></td>
+				</tr>		
 				<tr>
 					<td style="background-color:orange; width:70px">새로운사진</td>
 					<td><input type="file" name="photo"/></td>
